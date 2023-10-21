@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+        <input type="text" id="task" placeholder="Add a new task">
+        <button id="addTask">Add Task</button>
+        <ul id="taskList">
+            <!-- Task items will be added dynamically here -->
+        </ul>
+        <button id="deleteSelected">Delete Selected</button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    const taskInput = document.getElementById("task");
+    const addTaskButton = document.getElementById("addTask");
+    const taskList = document.getElementById("taskList");
+    const deleteSelectedButton = document.getElementById("deleteSelected");
+
+    addTaskButton.addEventListener("click", function () {
+        const taskText = taskInput.value.trim();
+
+        if (taskText !== "") {
+            // Create a new task item
+            const li = document.createElement("li");
+            li.innerHTML = `<input type="checkbox"><span>${taskText}</span>`;
+            taskList.appendChild(li);
+
+            // Clear the input field
+            taskInput.value = "";
+        }
+    });
+
+    deleteSelectedButton.addEventListener("click", function () {
+        const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+
+        checkboxes.forEach(function (checkbox) {
+            const listItem = checkbox.parentElement;
+            listItem.remove();
+        });
+    });
+});
+
+    </script>
+</body>
+</html>
